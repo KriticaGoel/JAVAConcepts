@@ -1,4 +1,4 @@
-package com.kritica.loose;
+package com.kritica.injection.loose;
 
 
 public class Service {

@@ -1,4 +1,4 @@
-package com.kritica.setterInjection;
+package com.kritica.injection.setterInjection;
 
 public class Car {
 

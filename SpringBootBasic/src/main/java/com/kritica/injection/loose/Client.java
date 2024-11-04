@@ -1,4 +1,4 @@
-package com.kritica.loose;
+package com.kritica.injection.loose;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -7,7 +7,7 @@ public class Client {
 
     public static void main(String[] args) {
 
-        ApplicationContext context = new ClassPathXmlApplicationContext("applicationLooseContext.xml");
+        ApplicationContext context = new ClassPathXmlApplicationContext("applicationContextLooseCoupling.xml");
 
         Service beanDatabase = (Service) context.getBean("servicedatabaseData");
         System.out.println(beanDatabase.getUserService());

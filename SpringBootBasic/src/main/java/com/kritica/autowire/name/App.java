@@ -1,15 +1,16 @@
-package com.kritica.firstBean;
+package com.kritica.autowire.name;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 public class App {
+
     public static void main(String[] args) {
         ApplicationContext context
-                = new ClassPathXmlApplicationContext("applicationContextFirstBean.xml");
+                = new ClassPathXmlApplicationContext("applicationContextAutoWireByName.xml");
 
-        MyFirstBean myBean = (MyFirstBean) context.getBean("myBean");
-        System.out.println(myBean);
+        Car car = (Car) context.getBean("car");
+        car.display();
+
     }
-
 }

@@ -1,11 +1,16 @@
 ### Agenda
 
-- Inversion of control(IOC)
-- Beans
-  - Xml configuration file
-  - Lifecycle of bean
-- Dependency Injection (DI)
-  - Constructor Injection
+- [Inversion of control(IOC)](#inversion-of-controlioc)
+- [Beans](#beans)
+  - [Xml configuration file](#xml-configuration-file)
+  - [Lifecycle of bean](#lifecycle-of-bean)
+- [Dependency Injection (DI)](#dependency-injection-di)
+  - [Constructor Injection](#constructor-injection)
+  - [Setter Injection](#setter-injection)
+- Autowiring
+  - Autowire by Name
+  - Autowire by Type
+  - Autowire by Constructor
 ### Inversion of control(IOC)
 
 > Its is a design principle where object creation and lifecycle management is transffer from the appilcation code to
@@ -222,4 +227,105 @@ public class Car {
 }
 ```
 
+[Home](#agenda)
 
+### Autowiring
+
+> Feature in a spring framework where own will resolve dependencies.
+
+1. We used to create an object and manage the dependency using java classes
+2. Then we moved to xml configuration to manage dependencies and object
+3. Spring framework has a feature called autowiring. its feature that automatically resolved and injects dependencies
+   between beans without requiring explicit definition in xml or java configurations.
+
+Types of Autowiring
+
+#### Autowire by Name
+
+> Setter method is needed to inject bean and
+> setter name and object name should be same _carSpecification_
+
+```xml
+
+<bean id="carSpecification" class="com.kritica.autowire.name.Specification">
+  <property name="make" value="Toyata"/>
+  <property name="model" value="Jazz"/>
+</bean>
+
+<bean id="car" class="com.kritica.autowire.name.Car" autowire="byName"/>
+```
+
+```java
+public class Car {
+  private Specification carSpecification;
+
+  //Autowire by name use setter method to set values
+  public void setCarSpecification(Specification carSpecification) {
+    this.carSpecification = carSpecification;
+  }
+
+  public void display() {
+    System.out.println(carSpecification.toString());
+  }
+}
+```
+
+#### Autowire by Type
+
+> Setter method is needed to inject bean and
+> setter name and object name can be different.
+> In xml only one bean define having same type
+
+```xml
+
+<bean id="carSpecification" class="com.kritica.autowire.type.Specification">
+  <property name="make" value="Toyata"/>
+  <property name="model" value="Jazz"/>
+</bean>
+
+<bean id="car" class="com.kritica.autowire.type.Car" autowire="byType"/>
+
+```
+
+```java
+public class Car {
+  private Specification specification;
+
+  public void setSpecification(Specification specification) {
+    this.specification = specification;
+  }
+
+  public void display() {
+    System.out.println(specification.toString());
+  }
+}
+
+```
+
+#### Autowire by Constructor
+
+> using constructor instead of setter
+
+```xml
+
+<bean id="carSpecification" class="com.kritica.autowire.constructor.Specification">
+  <property name="make" value="Toyata"/>
+  <property name="model" value="Jazz"/>
+</bean>
+
+<bean id="car" class="com.kritica.autowire.constructor.Car" autowire="constructor"/>
+```
+
+```java
+public class Car {
+  private Specification carSpecification;
+
+  public Car(Specification carSpecification) {
+    this.carSpecification = carSpecification;
+  }
+
+  public void display() {
+    System.out.println(carSpecification.toString());
+  }
+}
+```

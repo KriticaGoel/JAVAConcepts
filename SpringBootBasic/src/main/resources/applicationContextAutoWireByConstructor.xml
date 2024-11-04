@@ -5,17 +5,12 @@
         http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
     <!-- bean definitions here -->
-    <bean id="myBean" class="com.kritica.firstBean.MyFirstBean">
-        <property name="message" value="I am a first bean"/>
-    </bean>
 
-    <bean id="specification" class="com.kritica.contructorInjection.Specification">
+    <bean id="carSpecification" class="com.kritica.autowire.constructor.Specification">
         <property name="make" value="Toyata"/>
         <property name="model" value="Jazz"/>
     </bean>
 
-    <bean id="car" class="com.kritica.contructorInjection.Car">
-        <constructor-arg ref="specification"/>
-    </bean>
+    <bean id="car" class="com.kritica.autowire.constructor.Car" autowire="constructor"/>
 
 </beans>

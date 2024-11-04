@@ -6,17 +6,11 @@
 
     <!-- bean definitions here -->
 
-
-    <bean id="specification" class="com.kritica.setterInjection.Specification">
+    <bean id="carSpecification" class="com.kritica.autowire.type.Specification">
         <property name="make" value="Toyata"/>
         <property name="model" value="Jazz"/>
     </bean>
 
-    <bean id="car" class="com.kritica.setterInjection.Car">
-        <!--Setter injection -->
-        <property name="specification" ref="specification"/>
-        <!--Constructor Injection-->
-        <!--        <constructor-arg ref="specification"/>-->
-    </bean>
+    <bean id="car" class="com.kritica.autowire.type.Car" autowire="byType"/>
 
 </beans>

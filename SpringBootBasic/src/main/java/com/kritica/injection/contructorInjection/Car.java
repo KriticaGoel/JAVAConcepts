@@ -1,4 +1,4 @@
-package com.kritica.contructorInjection;
+package com.kritica.injection.contructorInjection;
 
 public class Car {
     private Specification specification;

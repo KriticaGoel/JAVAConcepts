@@ -6,16 +6,16 @@
 
     <!-- bean definitions here -->
 
-    <bean name="databaseData" class="com.kritica.loose.DatabaseSql"/>
-    <bean name="flatfileData" class="com.kritica.loose.FlatFileData"/>
-    <bean name="webserviceData" class="com.kritica.loose.WebserviceData"/>
-    <bean name="servicedatabaseData" class="com.kritica.loose.Service">
+    <bean name="databaseData" class="com.kritica.injection.loose.DatabaseSql"/>
+    <bean name="flatfileData" class="com.kritica.injection.loose.FlatFileData"/>
+    <bean name="webserviceData" class="com.kritica.injection.loose.WebserviceData"/>
+    <bean name="servicedatabaseData" class="com.kritica.injection.loose.Service">
         <constructor-arg ref="databaseData"/>
     </bean>
-    <bean name="serviceflatfileData" class="com.kritica.loose.Service">
+    <bean name="serviceflatfileData" class="com.kritica.injection.loose.Service">
         <constructor-arg ref="flatfileData"/>
     </bean>
-    <bean name="servicewebserviceData" class="com.kritica.loose.Service">
+    <bean name="servicewebserviceData" class="com.kritica.injection.loose.Service">
         <constructor-arg ref="webserviceData"/>
     </bean>
 </beans>

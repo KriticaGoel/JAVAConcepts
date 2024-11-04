@@ -1,4 +1,4 @@
-package com.kritica.setterInjection;
+package com.kritica.injection.contructorInjection;
 
 public class Specification {
     private String make;

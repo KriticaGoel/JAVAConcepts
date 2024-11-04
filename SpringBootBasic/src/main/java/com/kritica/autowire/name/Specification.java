@@ -1,4 +1,4 @@
-package com.kritica.contructorInjection;
+package com.kritica.autowire.name;
 
 public class Specification {
     private String make;
