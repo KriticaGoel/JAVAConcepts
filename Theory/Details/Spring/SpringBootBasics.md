@@ -8,9 +8,11 @@
   - [Constructor Injection](#constructor-injection)
   - [Setter Injection](#setter-injection)
 - Autowiring
-  - Autowire by Name
-  - Autowire by Type
-  - Autowire by Constructor
+  - [Autowire by Name](#autowire-by-name)
+  - [Autowire by Type](#autowire-by-type)
+  - [Autowire by Constructor](#autowire-by-constructor)
+- Annotations
+
 ### Inversion of control(IOC)
 
 > Its is a design principle where object creation and lifecycle management is transffer from the appilcation code to
