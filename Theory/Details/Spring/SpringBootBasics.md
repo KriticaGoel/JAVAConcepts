@@ -1,16 +1,225 @@
+### Agenda
+
+- Inversion of control(IOC)
+- Beans
+  - Xml configuration file
+  - Lifecycle of bean
+- Dependency Injection (DI)
+  - Constructor Injection
 ### Inversion of control(IOC)
 
 > Its is a design principle where object creation and lifecycle management is transffer from the appilcation code to
-> framework.
-
-### Dependency Injection (DI)
-
-> Design pattern used in OOPs where dependency of a class is provided externally rather than created in class interface
+> a framework.
 
 ### Beans
 
 > Objects that are managed by framework called beans.
 
-### appliction context
+Beans can be defined in various ways:
 
-> this file is used to define beans
+* Xml configuration file
+* Annotation
+* Java-based configuration
+
+#### Xml configuration file
+
+Application context file is used to define beans in xml format this file is stored under the resources folder, and
+filename needs to be added in the first java file called by compiler
+
+```java
+public class App {
+    public static void main(String[] args) {
+        ApplicationContext context
+                = new ClassPathXmlApplicationContext("applicationBeanContext.xml");
+
+        MyBean myBean = (MyBean) context.getBean("myBean");
+        System.out.println(myBean);
+    }
+}
+```
+
+**applictionBeanContext.xml**—Each bean is defined in <bean> tag with attributes sprdifying **class, properties, and
+dependencies**
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:schemaLocation="
+http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- bean definitions here -->
+    <bean id="myBean" class="example.bean.MyBean">
+        <property name="message" value="I am a first bean"/>
+    </bean>
+
+</beans>
+```
+
+```java
+public class MyBean {
+    private String message;
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
+    public void showMessage(){
+        System.out.println("Message: " + message);
+    }
+
+    @Override
+    public String toString() {
+        return "MyBean{" +
+                "message='" + message + '\'' +
+                '}';
+    }
+}
+```
+
+> Bean can be configured using annotation like @Component, @Service, @Repository, which is scanned by spring and managed
+> as bean.
+
+#### Lifecycle of bean
+
+1. Instantiation—Bean instance is created using bean defination and constructor injection
+2. Population of Properties—Properties should be set in bean either from setter, constructor or field injection
+3. Initialization—Initialization method invokes after properties ae set
+4. Ready to use — bean is mark ready to use
+5. Destruction—Destroying Bean
+
+[Home](#agenda)
+
+### Dependency Injection (DI)
+
+> Design pattern used in OOPs where dependency of a class is provided externally rather than created in class interface
+
+This can be achieved in two ways
+
+1. Constructor Injection
+2. Setter Injection
+
+#### Constructor Injection
+
+> Dependencies are provided to class through constructor
+
+Implementation:
+
+1. **Specification** class-Maintaining some private properties with getter and setter.
+2. **Car class** — Contain dependency of previous class Specification and a method which can be used by outside world.
+3. **Xml configuration file** responsible for initializing the bean and constructor injection
+4. **App Class** - Main class having xml call and method call
+
+* Xml Configuration
+
+```xml
+ <bean id="specification" class="com.kritica.contructorInjection.Specification">
+  <!--Setter injection -->
+        <property name="make" value="Toyata"/>
+        <property name="model" value="Jazz"/>
+    </bean>
+
+    <bean id="car" class="com.kritica.contructorInjection.Car">
+    <!--Constructor Injection-->
+        <constructor-arg ref="specification"/>
+    </bean>
+```
+
+Specification class
+
+```java
+public class Specification {
+  private String make;
+  private String model;
+
+  public String getMake() {
+    return make;
+  }
+
+  public void setMake(String make) {
+    this.make = make;
+  }
+
+  public String getModel() {
+    return model;
+  }
+
+  public void setModel(String model) {
+    this.model = model;
+  }
+
+  @Override
+  public String toString() {
+    return "Specification [make=" + make + ", model=" + model + "]";
+  }
+
+
+}
+```
+
+```java
+public class Car {
+  private Specification specification;
+
+  public Car(Specification specification) {
+    this.specification = specification;
+  }
+
+  public void display() {
+    System.out.println(specification.toString());
+  }
+}
+```
+
+Client class
+
+```java
+public static void main(String[] args) {
+        ApplicationContext context
+                = new ClassPathXmlApplicationContext("applicationContext.xml");
+
+        Car car = (Car) context.getBean("car");
+        car.display();
+
+    }
+```
+
+#### Setter Injection
+
+> Dependencies are provided to class through setter
+
+Implementation:
+Same as above only change in Car class instead of constructor we need to use setter
+change in xml file
+
+```xml
+<bean id="specification" class="com.kritica.setterInjection.Specification">
+        <property name="make" value="Toyata"/>
+        <property name="model" value="Jazz"/>
+    </bean>
+
+    <bean id="car" class="com.kritica.setterInjection.Car">
+        <!--Setter injection -->
+        <property name="specification" ref="specification"/>
+        <!--Constructor Injection-->
+<!--        <constructor-arg ref="specification"/>-->
+    </bean>
+```
+
+```java
+public class Car {
+
+  private Specification specification;
+
+  public void setSpecification(Specification specification) {
+    this.specification = specification;
+  }
+
+
+  public void display() {
+    System.out.println(specification.toString());
+  }
+}
+```
+
+

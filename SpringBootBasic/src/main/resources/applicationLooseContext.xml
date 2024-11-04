@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns="http://www.springframework.org/schema/beans"
+       xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- bean definitions here -->
+
+    <bean name="databaseData" class="com.kritica.loose.DatabaseSql"/>
+    <bean name="flatfileData" class="com.kritica.loose.FlatFileData"/>
+    <bean name="webserviceData" class="com.kritica.loose.WebserviceData"/>
+    <bean name="servicedatabaseData" class="com.kritica.loose.Service">
+        <constructor-arg ref="databaseData"/>
+    </bean>
+    <bean name="serviceflatfileData" class="com.kritica.loose.Service">
+        <constructor-arg ref="flatfileData"/>
+    </bean>
+    <bean name="servicewebserviceData" class="com.kritica.loose.Service">
+        <constructor-arg ref="webserviceData"/>
+    </bean>
+</beans>
