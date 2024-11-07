@@ -6,6 +6,8 @@
       <list>
         <option value="$PROJECT_DIR$/SpringBoot/pom.xml" />
         <option value="$PROJECT_DIR$/SpringBootBasic/pom.xml" />
+        <option value="$PROJECT_DIR$/ActiveMQExample/pom.xml" />
+        <option value="$PROJECT_DIR$/wsdlJava/pom.xml" />
       </list>
     </option>
     <option name="ignoredFiles">

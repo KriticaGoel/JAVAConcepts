@@ -331,3 +331,118 @@ public class Car {
   }
 }
 ```
+
+[Home](#agenda)
+
+### Annotations
+
+> it provides a way to add metadata to code
+
+Commonly used Spring annotation
+
+1. @Component - marks java class as a bean to manage component. We can give bean name as well
+2. @Autowired
+3. @Qualifier
+4. @Value - give default value in java class. setter is not needed
+5. @Repository
+6. @Service
+7. @Controller
+8. @RequestMapping
+9. @SpringBootApplication
+
+#### Component
+
+> It refers to java class which is managed by spring IOC container
+
+Defining Components in spring
+
+1. using XMl
+
+   ```
+<bean id="car" class="com.kritica.autowire.constructor.Car"/>
+```  
+
+2. using Annotation
+
+```java
+@Component
+public class MyComponent{
+    
+}
+```
+
+#### Component Scanning
+
+> It's helps to automatically detect and register the bean rom predefine package paths.
+
+Using XML -- Enable component scanning
+<context:component-scan base-package=" "/>
+
+Implementation
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+		https://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context
+		https://www.springframework.org/schema/context/spring-context.xsd">
+
+    <context:component-scan base-package="com.kritica.componentScan"/>
+
+</beans>
+```
+
+```java
+import org.springframework.stereotype.Component;
+
+@Component
+public class Employee {
+    private int id;
+    private String name;
+    private double salary;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public double getSalary() {
+        return salary;
+    }
+
+    public void setSalary(double salary) {
+        this.salary = salary;
+    }
+
+    @Override
+    public String toString() {
+        return "Employee [id=" + id + ", name=" + name + ", salary=" + salary + "]";
+    }
+}
+```
+
+```java
+public class App {
+    public static void main(String[] args) {
+        ApplicationContext context = new ClassPathXmlApplicationContext("applicationContextComponentScan.xml");
+        Employee emp=context.getBean("employee", Employee.class);
+        System.out.println(emp.toString());
+    }
+}
+
+```
+
