@@ -12,6 +12,10 @@
   - [Autowire by Type](#autowire-by-type)
   - [Autowire by Constructor](#autowire-by-constructor)
 - Annotations
+  - [Component](#component)
+  - [Value]()
+  - [Autowired](#autowired)
+  - [Qualifier](#using-qualifier)
 
 ### Inversion of control(IOC)
 
@@ -340,9 +344,9 @@ public class Car {
 
 Commonly used Spring annotation
 
-1. @Component - marks java class as a bean to manage component. We can give bean name as well
-2. [ @Autowired](#autowired)
-3. @Qualifier
+1. @[Component](#component) - marks java class as a bean to manage component. We can give bean name as well
+2. [ @Autowired](#autowired) - Adding depedency bean
+3. @[Qualifier](#using-qualifier) - name to a bean if multiple class have same name in different packages
 4. @Value - give default value in java class. setter is not needed
 5. @Repository
 6. @Service
@@ -477,3 +481,99 @@ public class App {
 ```
 
 #### Autowired
+
+> Adding dependency using annotation autowired instaed of xml file
+
+App class
+
+```java
+public class App {
+  public static void main(String[] args) {
+    ApplicationContext context
+            = new AnnotationConfigApplicationContext(AppConfig.class);
+
+    Car car = context.getBean("car", Car.class);
+    car.display();
+
+  }
+}
+```
+
+AppConfig class
+
+```java
+
+@Configuration
+@ComponentScan(basePackages = "com.kritica.annotation.autowired")
+public class AppConfig {
+
+}
+```
+
+Class have dependency
+
+```java
+
+@Component
+public class Car {
+  //autowired by fields
+  @Autowired
+  private Specification specification;
+//Autowired by constructor
+//    @Autowired
+//   public Car(Specification specification) {
+//       this.specification = specification;
+//   }
+
+  public void display() {
+    System.out.println(specification.toString());
+  }
+}
+
+```
+
+```java
+
+@Component
+public class Specification {
+  @Value("Toyata")
+  private String make;
+  @Value("ABC")
+  private String model;
+
+  public String getMake() {
+    return make;
+  }
+
+  public void setMake(String make) {
+    this.make = make;
+  }
+
+  public String getModel() {
+    return model;
+  }
+
+  public void setModel(String model) {
+    this.model = model;
+  }
+
+  @Override
+  public String toString() {
+    return "Specification [make=" + make + ", model=" + model + "]";
+  }
+
+
+}
+```
+
+##### Using Qualifier
+
+```java
+
+@Component("spec")
+public class Specification
+
+@Autowired
+@Qualifier("spec")
+private Specification specification;
+```
