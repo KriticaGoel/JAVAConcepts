@@ -1,13 +1,13 @@
-package com.kritica.wsdljava;
+package com.kritica.soapwsdljava;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class WsdlJavaApplication {
+public class SoapWsdlJavaApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(WsdlJavaApplication.class, args);
+        SpringApplication.run(SoapWsdlJavaApplication.class, args);
     }
 
 }

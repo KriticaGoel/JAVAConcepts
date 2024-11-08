@@ -341,7 +341,7 @@ public class Car {
 Commonly used Spring annotation
 
 1. @Component - marks java class as a bean to manage component. We can give bean name as well
-2. @Autowired
+2. [ @Autowired](#autowired)
 3. @Qualifier
 4. @Value - give default value in java class. setter is not needed
 5. @Repository
@@ -356,13 +356,13 @@ Commonly used Spring annotation
 
 Defining Components in spring
 
-1. using XMl
+1. [using XMl](#using-xml----)
 
-   ```
+```
 <bean id="car" class="com.kritica.autowire.constructor.Car"/>
 ```  
 
-2. using Annotation
+2. [using Annotation](#using-annotation)
 
 ```java
 @Component
@@ -375,7 +375,9 @@ public class MyComponent{
 
 > It's helps to automatically detect and register the bean rom predefine package paths.
 
-Using XML -- Enable component scanning
+##### Using XML --
+
+Enable component scanning
 <context:component-scan base-package=" "/>
 
 Implementation
@@ -446,3 +448,32 @@ public class App {
 
 ```
 
+##### Using Annotation
+
+Make a new class having all configuration
+
+```java
+
+@Configuration
+@ComponentScan(basePackages = "com.kritica.annotation.componentSan")
+public class AppConfig {
+
+}
+
+```
+
+Instead of classPathXMlApplicationCOntext use AnnotationConfigApplicationContext and send acpngig class as argumet
+
+```java
+public class App {
+    public static void main(String[] args) {
+        //ApplicationContext context = new ClassPathXmlApplicationContext("applicationContextComponentScan.xml");
+        ApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class);
+        Employee emp = context.getBean("employees", Employee.class);
+        System.out.println(emp.toString());
+    }
+}
+
+```
+
+#### Autowired

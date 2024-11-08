@@ -10,6 +10,7 @@
         <module name="SpringBootBasic" />
         <module name="ActiveMQExample" />
         <module name="wsdlJava" />
+        <module name="soapWsdlJava" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
@@ -20,6 +21,7 @@
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="ActiveMQExample" options="-parameters" />
       <module name="SpringBootBasic" options="-parameters" />
+      <module name="soapWsdlJava" options="-parameters" />
       <module name="wsdlJava" options="-parameters" />
     </option>
   </component>
