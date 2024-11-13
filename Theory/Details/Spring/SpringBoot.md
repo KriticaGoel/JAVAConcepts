@@ -34,17 +34,27 @@ Data access Layer - Repository classes exit.
 
 #### Annotations
 
-@RestController - above the controller class having all get and post request
-@GetMapping("</url>")
-@PostMapping("</url>)
-@PathVariable - read data from url like String name. This is coming in argument
-like helloget(@PathVariable String name)
-@RequestBody - read data of post-body like Stign name — this is coming in argument
-like helloPost(@RequestBody String message)
-JSON Response—create pojo and in return of controller method called object
-@DeleteMapping("</url>")
+* @RestController - above the controller class having all get and post request
+* @GetMapping("</url>")
+* @PostMapping("</url>)
+* @PathVariable - read data from url like String name. This is coming in argument
+* like helloget(@PathVariable String name)
+* @RequestBody - read data of post-body like string name — this is coming in argument
+* like helloPost(@RequestBody String message)
+* JSON Response—create pojo and in return of controller method called object
+* @DeleteMapping("</url>")
+* @PutMapping("</url>") - update
+* @RequestMapping()
+  > //@GetMapping("/api/admin/category")
+  @RequestMapping(value="/api/admin/category",method = RequestMethod.GET)
+  public ResponseEntity<List<Category>> createCategory() {
+  return new ResponseEntity<>(categoryService.getCategories(),HttpStatus.OK);
 
-@Service - on service impl class
+  }
+
+> @RequestMapping("/api/admin") all maping over class to dd common path
+
+* @Service - on service impl class
 
 #### Basic Program
 
@@ -196,7 +206,6 @@ public ResponseEntity<String> deleteCategory(@PathVariable int id) {
 public class CategoryController {
     @Autowired
     public CategoryService categoryService;
-
     //Create Category
     @PostMapping("/api/admin/createCategory")
     public ResponseEntity<String> createCategory(@RequestBody Category category) {
@@ -212,4 +221,20 @@ public class CategoryController {
             return new ResponseEntity<String>(e.getMessage(), e.getStatusCode());
         }
     }
+
+    //Update Category
+    @PutMapping("/api/admin/updateCategory/{id}")
+    public ResponseEntity<String> updateCategory(@PathVariable int id, @RequestBody Category category) {
+        return new ResponseEntity<String>(categoryService.updateCategory(id, category), HttpStatus.OK);
+    }
+
+    ;
+
+    //Get All category
+    @GetMapping("/api/admin/category")
+    public ResponseEntity<List<Category>> createCategory() {
+        return new ResponseEntity<>(categoryService.getCategories(), HttpStatus.OK);
+
+    }
+}
 ```
