@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Concepts.iml" filepath="$PROJECT_DIR$/Concepts.iml" />
+      <module fileurl="file://$PROJECT_DIR$/SpringBatchProject/SpringBatchProject.iml" filepath="$PROJECT_DIR$/SpringBatchProject/SpringBatchProject.iml" />
     </modules>
   </component>
 </project>

@@ -8,18 +8,26 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="SpringBootBasic" />
-        <module name="ActiveMQExample" />
+        <module name="SpringBatchLearning" />
         <module name="wsdlJava" />
         <module name="soapWsdlJava" />
+        <module name="SpringBatchProject" />
+        <module name="ActiveMQExample" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="SpringBatch" target="23" />
+      <module name="SpringBatchLearning" target="23" />
+      <module name="SpringBatchProject" target="1.8" />
       <module name="SpringExample" target="21" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="ActiveMQExample" options="-parameters" />
+      <module name="SpringBatch" options="-parameters" />
+      <module name="SpringBatchLearning" options="-parameters" />
+      <module name="SpringBatchProject" options="-parameters" />
       <module name="SpringBootBasic" options="-parameters" />
       <module name="soapWsdlJava" options="-parameters" />
       <module name="wsdlJava" options="-parameters" />
