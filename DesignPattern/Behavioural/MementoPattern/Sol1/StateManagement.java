@@ -9,9 +9,10 @@ public class StateManagement {
 
     public void write(String header, String content) {
         TextEditor textEditor = new TextEditor();
-        textEditor.setContent(header);
-        textEditor.setHeader(content);
+        textEditor.setContent(content);
+        textEditor.setHeader(header);
         stack.push(textEditor);
+        redostack.clear(); // Clear redo stack when a new state is added
     }
 
     public void display() {
@@ -26,7 +27,7 @@ public class StateManagement {
 
     public void undo() {
         if (stack.isEmpty() && redostack.isEmpty()) {
-
+            display();
         } else if (stack.isEmpty()) {
             System.out.println("No previous data present");
         } else {
@@ -37,7 +38,7 @@ public class StateManagement {
 
     public void redo() {
         if (stack.isEmpty() && redostack.isEmpty()) {
-
+            display();
         } else if (redostack.isEmpty()) {
             System.out.println("This is a last data");
         } else {

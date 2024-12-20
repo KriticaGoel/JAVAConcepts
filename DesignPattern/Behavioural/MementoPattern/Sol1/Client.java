@@ -5,42 +5,61 @@ import java.util.Scanner;
 public class Client {
     public static void main(String[] args) {
         StateManagement sm = new StateManagement();
+        Scanner scanner = new Scanner(System.in);  // Single Scanner object for all inputs
+
         while (true) {
-            Scanner action = new Scanner(System.in);  // Create a Scanner object
-            System.out.println("Enter action /n exit /n write /n undo /n redo /n display");
-            String actionData = action.nextLine();
-            while (actionData.equals("")) {
-                System.out.println("Enter action");
-                actionData = action.nextLine();
-            }
+            System.out.println("\nChoose an action:");
+            System.out.println("1. exit");
+            System.out.println("2. write");
+            System.out.println("3. undo");
+            System.out.println("4. redo");
+            System.out.println("5. display");
+            System.out.print("Enter your action: ");
 
-            if (actionData.equals("exit")) {
-                System.exit(0);
-            } else if (actionData.equals("write")) {
-                Scanner header = new Scanner(System.in);  // Create a Scanner object
-                System.out.println("Enter header");
-                String headerData = header.nextLine();  // Read user input
-                while (headerData.equals("")) {
-                    System.out.println("Enter header");
-                    headerData = header.nextLine();
-                }
-                Scanner content = new Scanner(System.in);
-                System.out.println("Enter content");
-                String contentData = content.nextLine();
-                while (contentData.equals("")) {
-                    System.out.println("Enter content");
-                    contentData = content.nextLine();
-                }
+            String action = scanner.nextLine().trim().toLowerCase();  // Normalize input
 
-                sm.write(headerData, contentData);
-            } else if (actionData.equals("display")) {
-                sm.display();
-            } else if (actionData.equals("undo")) {
-                sm.undo();
-            } else if (actionData.equals("redo")) {
-                sm.redo();
-            } else {
-                System.out.println("Action is not valid. Retry....");
+            switch (action) {
+                case "exit":
+                    System.out.println("Exiting the application...");
+                    scanner.close();
+                    return;  // End program gracefully
+
+                case "write":
+                    System.out.print("Enter header: ");
+                    String header = scanner.nextLine().trim();
+                    while (header.isEmpty()) {
+                        System.out.println("Header cannot be empty. Please retry.");
+                        header = scanner.nextLine().trim();
+                    }
+
+                    System.out.print("Enter content: ");
+                    String content = scanner.nextLine().trim();
+                    while (content.isEmpty()) {
+                        System.out.println("Content cannot be empty. Please retry.");
+                        content = scanner.nextLine().trim();
+                    }
+
+                    sm.write(header, content);
+                    System.out.println("Content saved successfully.");
+                    break;
+
+                case "display":
+                    sm.display();
+                    break;
+
+                case "undo":
+                    System.out.println("Performing undo...");
+                    sm.undo();
+                    break;
+
+                case "redo":
+                    System.out.println("Performing redo...");
+                    sm.redo();
+                    break;
+
+                default:
+                    System.out.println("Invalid action. Please try again.");
+                    break;
             }
         }
     }
