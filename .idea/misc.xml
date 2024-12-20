@@ -13,12 +13,14 @@
         <option value="$PROJECT_DIR$/SpringBatchProject/pom.xml" />
         <option value="$PROJECT_DIR$/SpringBatch/pom.xml" />
         <option value="$PROJECT_DIR$/SpringBatchLearning/pom.xml" />
+        <option value="$PROJECT_DIR$/JavaToWsdl/pom.xml" />
       </list>
     </option>
     <option name="ignoredFiles">
       <set>
         <option value="$PROJECT_DIR$/SpringBatch/pom.xml" />
         <option value="$PROJECT_DIR$/SpringBatchLearning/pom.xml" />
+        <option value="$PROJECT_DIR$/soapWsdlJava/pom.xml" />
         <option value="$PROJECT_DIR$/wsdlJava/soapWsdlJava/pom.xml" />
       </set>
     </option>
