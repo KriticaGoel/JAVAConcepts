@@ -10,6 +10,9 @@ public class TextEditor {
     }
 
     public void setContent(String content) {
+        if (content == null || content.isEmpty()) {
+            throw new IllegalArgumentException("Content cannot be null or empty");
+        }
         this.content = content;
     }
 
@@ -18,6 +21,14 @@ public class TextEditor {
     }
 
     public void setHeader(String header) {
+        if (header == null || header.isEmpty()) {
+            throw new IllegalArgumentException("Header cannot be null or empty");
+        }
         this.header = header;
+    }
+
+    @Override
+    public String toString() {
+        return "TextEditor [header=" + header + ", content=" + content + "]";
     }
 }

@@ -9,6 +9,10 @@ public class Client {
             Scanner action = new Scanner(System.in);  // Create a Scanner object
             System.out.println("Enter action /n exit /n write /n undo /n redo /n display");
             String actionData = action.nextLine();
+            while (actionData.equals("")) {
+                System.out.println("Enter action");
+                actionData = action.nextLine();
+            }
 
             if (actionData.equals("exit")) {
                 System.exit(0);
@@ -16,11 +20,17 @@ public class Client {
                 Scanner header = new Scanner(System.in);  // Create a Scanner object
                 System.out.println("Enter header");
                 String headerData = header.nextLine();  // Read user input
-
+                while (headerData.equals("")) {
+                    System.out.println("Enter header");
+                    headerData = header.nextLine();
+                }
                 Scanner content = new Scanner(System.in);
                 System.out.println("Enter content");
                 String contentData = content.nextLine();
-
+                while (contentData.equals("")) {
+                    System.out.println("Enter content");
+                    contentData = content.nextLine();
+                }
 
                 sm.write(headerData, contentData);
             } else if (actionData.equals("display")) {
