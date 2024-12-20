@@ -7,6 +7,11 @@ public class StateManagement {
     Stack<TextEditor> stack = new Stack<>();
     Stack<TextEditor> redostack = new Stack<>();
 
+
+    //    Deep Copying States
+//    Ensure the TextEditor objects are deeply copied
+//    when pushed to the stacks to avoid unintentional modifications.
+//    This would prevent reference-based issues.
     public void write(String header, String content) {
         TextEditor textEditor = new TextEditor();
         textEditor.setContent(content);
