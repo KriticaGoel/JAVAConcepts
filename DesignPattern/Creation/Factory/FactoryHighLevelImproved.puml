@@ -11,68 +11,114 @@ skinparam componentStyle uml2
 
 ' Style interfaces differently
 skinparam class {
-  BackgroundColor<<interface>> LightBlue
-  BorderColor<<interface>> DarkBlue
-  BackgroundColor White
-  BorderColor Black
+  BackgroundColor<<interface>> #F2F8FF
+  BorderColor<<interface>> #2B6CB0
+  ArrowColor #2B6CB0
+}
+skinparam class {
+  BackgroundColor<<concrete>> #FFF7ED
+  BorderColor<<concrete>> #D97706
+  ArrowColor #D97706
 }
 
-' Define interfaces
-interface Product <<interface>> {
-  +operation()
+' Top row: client and factory-selection
+package "Client" {
+  class App <<concrete>> {
+    - factory: UIFactory
+    + main(args)
+  }
 }
 
-interface Creator <<interface>> {
-  +factoryMethod(): Product
-  +someOperation()
+package "Factory Selection" {
+  class FactoryProvider <<concrete>> {
+    + getFactory(platform): UIFactory
+  }
 }
 
-' Define concrete products
-class ConcreteProductA {
-  +operation()
+' Middle row: abstractions
+package "Factory Abstraction" {
+  interface UIFactory <<interface>> {
+    + createButton(): Button
+    + createMenu(): Menu
+  }
 }
 
-class ConcreteProductB {
-  +operation()
+package "Product Abstractions" {
+  interface Button <<interface>>
+  interface Menu <<interface>>
 }
 
-' Define concrete creators
-class ConcreteCreatorA {
-  +factoryMethod(): Product
-  +someOperation()
+' Bottom: concrete factories and concrete products (arranged horizontally to avoid overlapping arrows)
+package "Concrete Factories" {
+  class FlutterFactory <<concrete>> {
+    + createButton(): Button
+    + createMenu(): Menu
+  }
+  class AndroidFactory <<concrete>> {
+    + createButton(): Button
+    + createMenu(): Menu
+  }
+  class IOSFactory <<concrete>> {
+    + createButton(): Button
+    + createMenu(): Menu
+  }
 }
 
-class ConcreteCreatorB {
-  +factoryMethod(): Product
-  +someOperation()
+package "Concrete Products" {
+  class FlutterButton <<concrete>>
+  class FlutterMenu <<concrete>>
+  class AndroidButton <<concrete>>
+  class AndroidMenu <<concrete>>
+  class IOSButton <<concrete>>
+  class IOSMenu <<concrete>>
 }
 
-' Relationships
-Creator <|.. ConcreteCreatorA : implements
-Creator <|.. ConcreteCreatorB : implements
+' Layout hints to reduce crossing
+App -[hidden]-> FactoryProvider
+FactoryProvider -[hidden]-> UIFactory
+UIFactory -[hidden]-> Button
+UIFactory -[hidden]-> Menu
 
-Product <|.. ConcreteProductA : implements
-Product <|.. ConcreteProductB : implements
+' Relationships (interfaces vs concretes)
+App --> FactoryProvider : requestFactory(platform)
+FactoryProvider --> UIFactory : returns concrete UIFactory
 
-ConcreteCreatorA ..> ConcreteProductA : <<creates>>
-ConcreteCreatorB ..> ConcreteProductB : <<creates>>
+UIFactory <|.. FlutterFactory
+UIFactory <|.. AndroidFactory
+UIFactory <|.. IOSFactory
 
-Creator ..> Product : <<uses>>
+Button <|.. FlutterButton
+Menu   <|.. FlutterMenu
 
-note right of Creator
-  The Creator declares the
-  factoryMethod() that returns
-  a Product object
+Button <|.. AndroidButton
+Menu   <|.. AndroidMenu
+
+Button <|.. IOSButton
+Menu   <|.. IOSMenu
+
+' Concrete factories create concrete products (arranged with orthogonal arrows)
+FlutterFactory --> FlutterButton : createButton()
+FlutterFactory --> FlutterMenu   : createMenu()
+
+AndroidFactory --> AndroidButton : createButton()
+AndroidFactory --> AndroidMenu  : createMenu()
+
+IOSFactory --> IOSButton : createButton()
+IOSFactory --> IOSMenu   : createMenu()
+
+' App uses product interfaces (not concrete classes)
+App ..> Button : uses via interface
+App ..> Menu : uses via interface
+
+' Notes showing runtime flow and benefits
+note top of FactoryProvider
+  FactoryProvider centralizes platform selection
+  and returns a concrete UIFactory.
 end note
 
-note bottom of ConcreteCreatorA
-  Overrides factoryMethod()
-  to create ConcreteProductA
-end note
-
-note bottom of ConcreteCreatorB
-  Overrides factoryMethod()
-  to create ConcreteProductB
+note right of Button
+  App depends only on product interfaces:
+  decoupling client and concrete implementations.
 end note
 
 @enduml

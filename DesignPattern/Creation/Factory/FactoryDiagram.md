@@ -1,62 +1,162 @@
-# Factory Pattern Diagrams
+# Factory Pattern — High-Level Diagram
 
-This directory contains high-level diagrams for the Factory pattern, illustrating the relationship between the Creator and Product hierarchies.
+This directory contains a high-level conceptual diagram for the Factory design pattern. The diagram illustrates the relationship between client code, factory abstractions, concrete factories, and the product hierarchy, emphasizing how the pattern decouples object creation from concrete implementations.
 
-## Files
+## Diagram
 
-- **FactoryHighLevelImproved.puml** - PlantUML source file for the improved high-level Factory pattern diagram
-- **FactoryHighLevelImproved.svg** - SVG rendering of the diagram
-- **FactoryHighLevelImproved.png** - PNG rendering of the diagram
+![Factory High-Level PNG](./FactoryHighLevelImproved.puml.png)
 
-## Diagram Overview
+[SVG version](./FactoryHighLevelImproved.puml.svg)
 
-The improved high-level Factory pattern diagram demonstrates:
+The diagram shows:
+- **Client and Factory Selection**: The `App` client requests a factory via `FactoryProvider`, which returns a concrete `UIFactory` implementation based on the platform.
+- **Factory and Product Abstractions**: `UIFactory` interface declares factory methods (`createButton()`, `createMenu()`), and `Button`/`Menu` interfaces define product contracts.
+- **Concrete Factories and Products**: Each platform (Flutter, Android, iOS) has its own concrete factory (`FlutterFactory`, `AndroidFactory`, `IOSFactory`) that creates platform-specific products (`FlutterButton`, `AndroidButton`, etc.).
+- **Decoupling**: The client depends only on the abstract `UIFactory`, `Button`, and `Menu` interfaces, not on concrete implementations, allowing easy platform switching without changing client code.
 
-1. **Interface Separation**: Clear visual distinction between interfaces (shown in light blue) and concrete classes (shown in white)
-2. **Orthogonal Layout**: Uses orthogonal arrows to avoid visual overlap and improve readability
-3. **Creation Flow**: Labeled relationships show how concrete creators instantiate specific concrete products
-4. **Pattern Structure**:
-   - `Creator` interface declares the `factoryMethod()` that returns a `Product`
-   - Concrete creators (`ConcreteCreatorA`, `ConcreteCreatorB`) implement the factory method to create specific products
-   - `Product` interface defines the common interface for all products
-   - Concrete products (`ConcreteProductA`, `ConcreteProductB`) implement the product interface
+## PlantUML Source
 
-## Key Relationships
+````plantuml
+@startuml
+' Improved high-level Factory diagram
+' - orthogonal arrows to avoid overlap
+' - interfaces are styled differently from concrete classes
+' - labelled interactions show flow
 
-- **Inheritance**: Concrete creators implement the Creator interface; concrete products implement the Product interface
-- **Dependency**: Creators depend on the Product interface (not concrete products)
-- **Creation**: Each concrete creator is responsible for creating its corresponding concrete product
+left to right direction
+skinparam linetype ortho
+skinparam shadowing false
+skinparam componentStyle uml2
 
-## Design Benefits
+' Style interfaces differently
+skinparam class {
+  BackgroundColor<<interface>> #F2F8FF
+  BorderColor<<interface>> #2B6CB0
+  ArrowColor #2B6CB0
+}
+skinparam class {
+  BackgroundColor<<concrete>> #FFF7ED
+  BorderColor<<concrete>> #D97706
+  ArrowColor #D97706
+}
 
-- **Encapsulation**: Object creation logic is encapsulated in factory methods
-- **Extensibility**: New product types can be added without modifying existing code
-- **Loose Coupling**: Client code depends on abstractions (Creator and Product interfaces) rather than concrete implementations
+' Top row: client and factory-selection
+package "Client" {
+  class App <<concrete>> {
+    - factory: UIFactory
+    + main(args)
+  }
+}
 
-## Rendering the Diagrams
+package "Factory Selection" {
+  class FactoryProvider <<concrete>> {
+    + getFactory(platform): UIFactory
+  }
+}
 
-To regenerate the diagrams from the PlantUML source:
+' Middle row: abstractions
+package "Factory Abstraction" {
+  interface UIFactory <<interface>> {
+    + createButton(): Button
+    + createMenu(): Menu
+  }
+}
 
-### Using PlantUML JAR
+package "Product Abstractions" {
+  interface Button <<interface>>
+  interface Menu <<interface>>
+}
 
+' Bottom: concrete factories and concrete products (arranged horizontally to avoid overlapping arrows)
+package "Concrete Factories" {
+  class FlutterFactory <<concrete>> {
+    + createButton(): Button
+    + createMenu(): Menu
+  }
+  class AndroidFactory <<concrete>> {
+    + createButton(): Button
+    + createMenu(): Menu
+  }
+  class IOSFactory <<concrete>> {
+    + createButton(): Button
+    + createMenu(): Menu
+  }
+}
+
+package "Concrete Products" {
+  class FlutterButton <<concrete>>
+  class FlutterMenu <<concrete>>
+  class AndroidButton <<concrete>>
+  class AndroidMenu <<concrete>>
+  class IOSButton <<concrete>>
+  class IOSMenu <<concrete>>
+}
+
+' Layout hints to reduce crossing
+App -[hidden]-> FactoryProvider
+FactoryProvider -[hidden]-> UIFactory
+UIFactory -[hidden]-> Button
+UIFactory -[hidden]-> Menu
+
+' Relationships (interfaces vs concretes)
+App --> FactoryProvider : requestFactory(platform)
+FactoryProvider --> UIFactory : returns concrete UIFactory
+
+UIFactory <|.. FlutterFactory
+UIFactory <|.. AndroidFactory
+UIFactory <|.. IOSFactory
+
+Button <|.. FlutterButton
+Menu   <|.. FlutterMenu
+
+Button <|.. AndroidButton
+Menu   <|.. AndroidMenu
+
+Button <|.. IOSButton
+Menu   <|.. IOSMenu
+
+' Concrete factories create concrete products (arranged with orthogonal arrows)
+FlutterFactory --> FlutterButton : createButton()
+FlutterFactory --> FlutterMenu   : createMenu()
+
+AndroidFactory --> AndroidButton : createButton()
+AndroidFactory --> AndroidMenu  : createMenu()
+
+IOSFactory --> IOSButton : createButton()
+IOSFactory --> IOSMenu   : createMenu()
+
+' App uses product interfaces (not concrete classes)
+App ..> Button : uses via interface
+App ..> Menu : uses via interface
+
+' Notes showing runtime flow and benefits
+note top of FactoryProvider
+  FactoryProvider centralizes platform selection
+  and returns a concrete UIFactory.
+end note
+
+note right of Button
+  App depends only on product interfaces:
+  decoupling client and concrete implementations.
+end note
+
+@enduml
+````
+
+## How to Regenerate
+
+To regenerate the PNG and SVG diagrams from the PlantUML source, use the following commands:
+
+### Generate PNG
 ```bash
-# Generate SVG
-java -jar plantuml.jar -tsvg FactoryHighLevelImproved.puml
-
-# Generate PNG
 java -jar plantuml.jar -tpng FactoryHighLevelImproved.puml
+mv FactoryHighLevelImproved.png FactoryHighLevelImproved.puml.png
 ```
 
-### Using PlantUML CLI (if installed)
-
+### Generate SVG
 ```bash
-# Generate SVG
-plantuml -tsvg FactoryHighLevelImproved.puml
-
-# Generate PNG
-plantuml -tpng FactoryHighLevelImproved.puml
+java -jar plantuml.jar -tsvg FactoryHighLevelImproved.puml
+mv FactoryHighLevelImproved.svg FactoryHighLevelImproved.puml.svg
 ```
 
-## Related Files
-
-- **FactoryClassDiagram.puml** - Detailed class diagram showing the complete Factory pattern implementation with Android, iOS, and Flutter UI examples
+Make sure you have PlantUML installed and Graphviz available on your system for rendering.
