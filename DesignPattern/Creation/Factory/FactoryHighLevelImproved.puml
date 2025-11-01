@@ -1,0 +1,78 @@
+@startuml
+' Improved high-level Factory diagram
+' - orthogonal arrows to avoid overlap
+' - interfaces are styled differently from concrete classes
+' - labelled interactions show flow
+
+left to right direction
+skinparam linetype ortho
+skinparam shadowing false
+skinparam componentStyle uml2
+
+' Style interfaces differently
+skinparam class {
+  BackgroundColor<<interface>> LightBlue
+  BorderColor<<interface>> DarkBlue
+  BackgroundColor White
+  BorderColor Black
+}
+
+' Define interfaces
+interface Product <<interface>> {
+  +operation()
+}
+
+interface Creator <<interface>> {
+  +factoryMethod(): Product
+  +someOperation()
+}
+
+' Define concrete products
+class ConcreteProductA {
+  +operation()
+}
+
+class ConcreteProductB {
+  +operation()
+}
+
+' Define concrete creators
+class ConcreteCreatorA {
+  +factoryMethod(): Product
+  +someOperation()
+}
+
+class ConcreteCreatorB {
+  +factoryMethod(): Product
+  +someOperation()
+}
+
+' Relationships
+Creator <|.. ConcreteCreatorA : implements
+Creator <|.. ConcreteCreatorB : implements
+
+Product <|.. ConcreteProductA : implements
+Product <|.. ConcreteProductB : implements
+
+ConcreteCreatorA ..> ConcreteProductA : <<creates>>
+ConcreteCreatorB ..> ConcreteProductB : <<creates>>
+
+Creator ..> Product : <<uses>>
+
+note right of Creator
+  The Creator declares the
+  factoryMethod() that returns
+  a Product object
+end note
+
+note bottom of ConcreteCreatorA
+  Overrides factoryMethod()
+  to create ConcreteProductA
+end note
+
+note bottom of ConcreteCreatorB
+  Overrides factoryMethod()
+  to create ConcreteProductB
+end note
+
+@enduml
