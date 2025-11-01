@@ -1,0 +1,78 @@
+@startuml
+' --- Interfaces / Abstract types
+interface UIFactory {
+  +createButton(): Button
+  +createMenu(): Menu
+}
+
+interface Button {
+  +render()
+  +onClick()
+}
+
+interface Menu {
+  +render()
+  +open()
+  +close()
+}
+
+' --- Concrete factories
+class Flutter {
+  +createButton(): Button
+  +createMenu(): Menu
+}
+class Android {
+  +createButton(): Button
+  +createMenu(): Menu
+}
+class IOS {
+  +createButton(): Button
+  +createMenu(): Menu
+}
+
+' --- Concrete products (examples)
+class FlutterButton {
+  +render()
+  +onClick()
+}
+class FlutterMenu {
+  +render()
+  +open()
+  +close()
+}
+class AndroidButton { +render(); +onClick() }
+class AndroidMenu   { +render(); +open(); +close() }
+class IOSButton     { +render(); +onClick() }
+class IOSMenu       { +render(); +open(); +close() }
+
+' --- Client
+class App {
+  -factory: UIFactory
+  +main(args)
+}
+
+' --- Relationships
+UIFactory <|.. Flutter
+UIFactory <|.. Android
+UIFactory <|.. IOS
+
+Button <|.. FlutterButton
+Menu   <|.. FlutterMenu
+
+Button <|.. AndroidButton
+Menu   <|.. AndroidMenu
+
+Button <|.. IOSButton
+Menu   <|.. IOSMenu
+
+Flutter ..> FlutterButton : creates >
+Flutter ..> FlutterMenu   : creates >
+Android ..> AndroidButton : creates >
+Android ..> AndroidMenu   : creates >
+IOS ..> IOSButton         : creates >
+IOS ..> IOSMenu           : creates >
+
+App ..> UIFactory : uses >
+App ..> Button : depends on >
+App ..> Menu : depends on >
+@enduml
