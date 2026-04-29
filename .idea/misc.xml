@@ -14,6 +14,8 @@
         <option value="$PROJECT_DIR$/SpringBatch/pom.xml" />
         <option value="$PROJECT_DIR$/SpringBatchLearning/pom.xml" />
         <option value="$PROJECT_DIR$/JavaToWsdl/pom.xml" />
+        <option value="$PROJECT_DIR$/databaseConnection/pom.xml" />
+        <option value="$PROJECT_DIR$/template/pom.xml" />
       </list>
     </option>
     <option name="ignoredFiles">
@@ -27,7 +29,7 @@
       </set>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_23" default="true" project-jdk-name="openjdk-23" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_21" default="true" project-jdk-name="openjdk-23" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/out" />
   </component>
 </project>

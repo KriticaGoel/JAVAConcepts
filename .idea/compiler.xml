@@ -9,31 +9,26 @@
         <outputRelativeToContentRoot value="true" />
         <module name="SpringBootBasic" />
         <module name="SpringBatchLearning" />
+        <module name="ActiveMQExample" />
         <module name="soapWsdlJava" />
         <module name="SpringBatchProject" />
-        <module name="ActiveMQExample" />
+      </profile>
+      <profile name="Annotation profile for databaseConnection" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="false">
+          <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.40/lombok-1.18.40.jar" />
+        </processorPath>
+        <module name="template" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="JavaToWsdl" target="1.8" />
-      <module name="soapWsdlJava (1)" target="23" />
-      <module name="SpringBatch" target="23" />
-      <module name="SpringBatchLearning" target="23" />
-      <module name="SpringBatchProject" target="1.8" />
-      <module name="SpringExample" target="21" />
-      <module name="wsdlJava" target="17" />
-    </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="ActiveMQExample" options="-parameters" />
-      <module name="SpringBatch" options="-parameters" />
-      <module name="SpringBatchLearning" options="-parameters" />
-      <module name="SpringBatchProject" options="-parameters" />
       <module name="SpringBootBasic" options="-parameters" />
-      <module name="soapWsdlJava" options="-parameters" />
-      <module name="soapWsdlJava (1)" options="-parameters" />
-      <module name="wsdlJava" options="-parameters" />
+      <module name="template" options="-parameters" />
     </option>
   </component>
 </project>
