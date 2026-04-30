@@ -1,4 +1,4 @@
-package com.template;
+package com.database;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -6,10 +6,10 @@ import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
 @ComponentScan(basePackages = {"com"})
-public class TemplateApplication {
+public class DatabaseApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(TemplateApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(DatabaseApplication.class, args);
+    }
 
 }
