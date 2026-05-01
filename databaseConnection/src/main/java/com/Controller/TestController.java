@@ -47,7 +47,7 @@ public class TestController {
 
     @PostMapping("/jdbcTemplate/createUser/{name}/{email}")
     public int createUser(@PathVariable String name, @PathVariable String email) throws SQLException {
-        return service.createuser(name, email);
+        return service.createUser(name, email);
 
     }
 

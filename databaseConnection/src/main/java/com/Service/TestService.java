@@ -1,8 +1,10 @@
 package com.Service;
 
 import com.Model.Users;
+import com.Repository.NamedJdbcTemplateRepository;
 import com.Repository.RawJDBCConnection;
 import com.Repository.UserJdbcRepository;
+import com.dto.UserRequest;
 import org.springframework.stereotype.Service;
 
 import java.sql.SQLException;
@@ -13,10 +15,12 @@ public class TestService {
 
     private RawJDBCConnection rawJDBCConnection;
     private UserJdbcRepository userJdbcRepository;
+    private NamedJdbcTemplateRepository namedJdbcTemplateRepository;
 
-    public TestService(RawJDBCConnection rawJDBCConnection, UserJdbcRepository userJdbcRepository) {
+    public TestService(RawJDBCConnection rawJDBCConnection, UserJdbcRepository userJdbcRepository, NamedJdbcTemplateRepository namedJdbcTemplateRepository) {
         this.rawJDBCConnection = rawJDBCConnection;
         this.userJdbcRepository = userJdbcRepository;
+        this.namedJdbcTemplateRepository = namedJdbcTemplateRepository;
     }
 
     public void testRawJDBC() throws SQLException {
@@ -47,8 +51,11 @@ public class TestService {
         return userJdbcRepository.updateByName(name, email);
     }
 
-    public int createuser(String name, String email) {
-        return userJdbcRepository.createUser(name, email);
+    public int createUser(String name, String email) {
+        //  return userJdbcRepository.createUser(name, email);
+        UserRequest request = new UserRequest(name, email);
+
+        return namedJdbcTemplateRepository.createUserMap(request);
     }
 
 

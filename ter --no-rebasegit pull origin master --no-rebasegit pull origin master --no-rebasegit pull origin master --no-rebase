@@ -1,0 +1,52 @@
+* [33m8ba5798[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmaster[m[33m)[m Database
+* [33m14a2d56[m[33m ([m[1;31morigin/master[m[33m)[m RawJDBC
+* [33m24d5aae[m mis
+* [33mc5c0fe9[m RawJDBC
+* [33mfbdd356[m RawJDBC
+* [33m8a88d0a[m Generic bound
+* [33mc518c1e[m GenericStaticMethod
+* [33mb9ab90e[m GenericMethod
+* [33m2b28675[m Generic101
+*   [33m8add05c[m Merge branch 'master' of https://github.com/KriticaGoel/JAVAConcepts
+[32m|[m[33m\[m  
+* [33m|[m [33m2a2cf8d[m Mememto code. Sol1 : Basic  sol2: Problem of basic and sol3 memento design
+[33m|[m [33m|[m * [33m62cc6a6[m[33m ([m[1;31morigin/copilot/add-high-level-factory-diagrams[m[33m)[m Add high-level Factory diagrams for Factory pattern
+[33m|[m [33m|[m * [33m2f25467[m Add high-level Factory diagrams for Factory pattern
+[33m|[m [33m|[m * [33m4061df0[m Initial plan
+[33m|[m [33m|[m[33m/[m  
+[33m|[m [33m|[m * [33m96b3e1e[m[33m ([m[1;31morigin/copilot/addfactory-diagrams[m[33m)[m Add rendered PlantUML diagrams and documentation for Factory pattern
+[33m|[m [33m|[m * [33m566562c[m Initial plan
+[33m|[m [33m|[m[33m/[m  
+[33m|[m * [33m8764d12[m Add PlantUML diagrams and render instructions for Factory pattern
+[33m|[m[33m/[m  
+* [33mac252b3[m Mememto code. Sol1 : Basic  sol2: Problem of basic and sol3 memento design
+* [33m3a808e3[m added comment for deepcopy
+* [33m73128c7[m Removed Multiple Scanner Objects,  End program gracefully,Improve the menu display for clarity
+* [33ma2428a4[m Handle empty command
+* [33m19b5bac[m undo redo basic solution using stack
+* [33ma507c2c[m remove data
+* [33m295e7b1[m One-to-One mapping bidirectiopn
+* [33mcc97a83[m Update sorting
+* [33m3074eef[m Update Pagenation
+* [33m96f6b66[m Added Request parameter
+* [33m6b09bf4[m Added till DTO intro
+* [33m538b32d[m custom exception handling
+* [33m5cc8b7e[m custom exception handling
+* [33m344465c[m custom exception handlkng
+* [33m30e8b76[m custom findBy
+* [33macfd936[m Adding data in JPA
+* [33md04f5f7[m workspace setup files
+* [33md97a4c5[m Validation in spring boot
+* [33m6facdc3[m spring road map
+* [33mb67218f[m Java  road amp
+* [33m2c8bc6c[m initail draft of jpa
+* [33m6f6de49[m springboot basics and rest api
+* [33mc2012e9[m springboot
+* [33mabbeca0[m springboot
+* [33me16096a[m ComponentScan
+* [33med7a794[m ComponentScan
+* [33m0b2f57b[m Active mq
+* [33md546fac[m Adding Autowiring
+* [33m47697d3[m Adding IOC code
+* [33m6b9b2a4[m Adding IOC code
+* [33m816fb46[m First commit
