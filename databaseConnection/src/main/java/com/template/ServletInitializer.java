@@ -1,4 +1,4 @@
-package com.template;
+package com.template_delete;
 
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;

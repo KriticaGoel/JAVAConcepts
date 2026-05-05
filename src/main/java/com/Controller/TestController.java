@@ -2,6 +2,7 @@ package com.Controller;
 
 import com.Model.Users;
 import com.Service.TestService;
+import com.dto.UserDTO;
 import org.springframework.web.bind.annotation.*;
 
 import java.sql.SQLException;
@@ -51,7 +52,7 @@ public class TestController {
 
     }
 
-    @PostMapping("/jdbcTemplate/updateUser/{name}/{email}")
+    @PutMapping("/jdbcTemplate/updateUser/{name}/{email}")
     public int updateUser(@PathVariable String name, @PathVariable String email) throws SQLException {
         return service.updateByName(name, email);
     }
@@ -59,6 +60,13 @@ public class TestController {
     @DeleteMapping("/jdbcTemplate/deleteUser/{name}")
     public int deleteUser(@PathVariable String name) throws SQLException {
         return service.deleteUser(name);
+    }
+
+    //Nested
+    @PostMapping("/namedjdbcTemplate/createUserAddress")
+    public int createUserAddress(@RequestBody UserDTO request) {
+
+        return service.createUserAddressUsingMapSqlParameterSource(request);
     }
 
 }

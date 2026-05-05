@@ -2,13 +2,23 @@ package com.Model;
 
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Component
 public class Users {
 
     private Integer id;
     private String name;
     private String email;
+    private List<Address> address;
 
+    public List<Address> getAddress() {
+        return address;
+    }
+
+    public void setAddress(List<Address> address) {
+        this.address = address;
+    }
 
     public Integer getId() {
         return id;
