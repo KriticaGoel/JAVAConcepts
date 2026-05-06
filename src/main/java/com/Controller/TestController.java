@@ -69,4 +69,9 @@ public class TestController {
         return service.createUserAddressUsingMapSqlParameterSource(request);
     }
 
+    @GetMapping("/namedjdbcTemplate/getUser/{userId}")
+    public List<Users> getUserAndAddress(@PathVariable String userId) {
+        return service.getUserAndAddress(Integer.valueOf(userId));
+    }
+
 }

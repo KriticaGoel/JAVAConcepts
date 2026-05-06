@@ -94,5 +94,9 @@ public class TestService {
         return namedJdbcTemplateRepository.createUserAddressUsingMapSqlParameterSource(user);
     }
 
+    public List<Users> getUserAndAddress(Integer userId) {
+        return namedJdbcTemplateRepository.getUsersWithAddress(userId);
+    }
+
 
 }
