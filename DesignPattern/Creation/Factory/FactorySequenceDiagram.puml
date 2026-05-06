@@ -1,0 +1,20 @@
+@startuml
+actor User
+participant App
+participant FactoryProvider
+participant UIFactory
+participant Button
+participant Menu
+
+User -> App : start(platform)
+App -> FactoryProvider : getFactory("flutter")
+FactoryProvider -> UIFactory : instantiate concrete factory (Flutter)
+App -> UIFactory : createButton()
+UIFactory -> Button : return FlutterButton instance
+App -> UIFactory : createMenu()
+UIFactory -> Menu : return FlutterMenu instance
+App -> Button : render()
+App -> Menu : render()
+User -> Button : click()
+Button -> App : onClick() behavior
+@enduml
